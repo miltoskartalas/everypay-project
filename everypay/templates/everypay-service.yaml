@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: everypay-service
+  namespace: everypay
+  annotations:
+    prometheus.io/scrape: 'true'
+    prometheus.io/path: '/metrics'
+    prometheus.io/port: '8080'
+spec:
+  selector:
+    app: everypay
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: ClusterIP
+  

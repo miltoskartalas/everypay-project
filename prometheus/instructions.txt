@@ -1,0 +1,3 @@
+minikube addons enable ingress
+helm upgrade --install --create-namespace -n monitoring prometheus ./prometheus
+helm upgrade --install --create-namespace -n everypay everypay ./everypay

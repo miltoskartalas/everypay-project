@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: everypay
+  labels:
+    release: beta
+    type: poc
+  name: everypay-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      type: poc
+      app: everypay
+  template:
+    metadata:
+      labels:
+        app: everypay
+        release: beta
+        type: poc
+    spec:
+      containers:
+        - image: "miltoskr/everypay"
+          name: everypay-container
+          ports:
+            - containerPort: 8080
+
+
