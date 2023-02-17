@@ -33,9 +33,10 @@ At this point we have both the application and prometheus succesfully deployd. L
 8) kubectl get ingress -n monitoring 
 9) Copy the IPv4 address that you see under the ADRESS column
 
-10) Open the /etc/hosts file with root priveleges and add the following two lines at the end of the file
+10) Open the /etc/hosts file with root priveleges and add the following two lines on below the other at the end of the file
 
 <IPv4_copied> everypay.local
+        
 <IPv4_copied> prometheus.local
 
 where IPv4_copied, is the address you copied at 6.
