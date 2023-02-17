@@ -35,8 +35,8 @@ At this point we have both the application and prometheus succesfully deployd. L
 
 10) Open the /etc/hosts file with root priveleges and add the following two lines at the end of the file
 
-    <IPv4_copied> everypay.local
-    <IPv4_copied> prometheus.local
+<IPv4_copied> everypay.local
+<IPv4_copied> prometheus.local
 
 where IPv4_copied, is the address you copied at 6.
 
