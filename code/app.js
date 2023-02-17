@@ -1,9 +1,9 @@
 const express = require('express');
 const axios = require('axios'); 
 const client = require('prom-client')
+
 const register = new client.Registry();
-
-
+client.collectDefaultMetrics({ register })
 register.setDefaultLabels({
   app: 'everypay-app'
 })
@@ -16,7 +16,13 @@ const requestDurationHistogram = new client.Histogram({
 });
 register.registerMetric(requestDurationHistogram);
 
-client.collectDefaultMetrics({ register })
+const comicsRequestCounter = new client.Counter({
+  name: 'http_comics_request_total',
+  help: 'Total number of requests for the comics endpoint',
+  labelNames: ['method', 'route', 'status_code']
+});
+register.registerMetric(comicsRequestCounter);
+
 function convertNumberToMonth(index) {
     const months = [
       'January',
@@ -53,8 +59,9 @@ app.get('/metrics', async (req, res) => {
   }
 });
 app.get('/comics/:start/:end', async (req, res) => {
+  
   const end = requestDurationHistogram.startTimer();
-
+  
   try {
     // Parse start and end parameters as integers, in case of not a integer, cut the decimal part
     const start = parseInt(req.params.start);
@@ -89,6 +96,7 @@ app.get('/comics/:start/:end', async (req, res) => {
     // In case of an error send back the message
     res.status(400).send(error.message);
   }finally {
+    comicsRequestCounter.inc({ method: req.method, route: req.route.path, status_code: res.statusCode });
     end({ method: req.method, route: req.route.path, status_code: res.statusCode });
   }
 });

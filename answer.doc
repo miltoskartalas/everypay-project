@@ -1,0 +1,13 @@
+Question:
+
+Consider if you had to scale this application for 1 million users, what
+technologies would you use (such as a cloud provider, deployments on
+Kubernetes or another engine, networking, monitoring, and high
+availability) and what technical steps would you choose for the scaling?
+
+In order to scale this application for that big amount of users one approach would be to scale it horizontally by replica nodes on a cloud provider like AWS managed by an orchestrator like Kubernetes. Then, I would use a load balancer proxy, to distribute the load among all the nodes. In addition, I would add a caching service to cache queries that were previously done. Of course, the benefit of that, is highly influenced by the nature of the application and the time of caching the data should be evaluated with the frequency of how often the data are supposed to change.
+
+Furthermore, another very important aspect is to have a proper monitoring/alerting system for our application but also for the infrastructure that will help us understand better how our users behave and how our application is influenced. For example monitoring the average time of response of the application on days that not many users are using the application is different with a day that the total requests is higher, so having a lot of monitoring info is of course crucial, but beneficial only when we read/analyze them correctly. Monitoring of the infrastructure is also critical because we might observe bad performance of our application due to  a problem in the infrastructure and not because of a problem in the application. Alerting system is important so the right people get notified on time.
+
+
+Lastly and mostly related for high availability, it is good to choose nodes in the cloud to be spread around multiple geographical regions, so in a scenario of a failure in the networking that is out of our power, and other people have to intervene we have other instances serving our application.

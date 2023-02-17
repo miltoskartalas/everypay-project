@@ -1,0 +1,1 @@
+The deployment of Prometheus on minikube is done with the help of helm and the official repository. I am only overwriting some values in the values.yaml file in order also to have there the ingress controler configured.
