@@ -20,20 +20,20 @@ Prerequisites:
 2) helm available
 
 Steps in order to have the application deployed
-
-1) minikube start
-2) minikube addons enable ingress
-3) helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-4) helm update
-5) helm upgrade --install --create-namespace -n everypay everypay ./everypay
-6) helm upgrade --install --create-namespace -n monitoring prometheus ./prometheus
+1) open the main folder of the repository
+2) minikube start
+3) minikube addons enable ingress
+4) helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+5) helm update
+6) helm upgrade --install --create-namespace -n everypay everypay ./everypay
+7) helm upgrade --install --create-namespace -n monitoring prometheus ./prometheus
 
 At this point we have both the application and prometheus succesfully deployd. Last thing, is to configure our machine in order to have access inside the cluster with a hostname. We have to get the ip of the ingress.
 
-6) kubectl get ingress -n monitoring 
-7) Copy the IPv4 address that you see under the ADRESS column
+8) kubectl get ingress -n monitoring 
+9) Copy the IPv4 address that you see under the ADRESS column
 
-8) Open the /etc/hosts file with root priveleges and add the following two lines
+10) Open the /etc/hosts file with root priveleges and add the following two lines
     <IPv4_copied> everypay.local
     <IPv4_copied> prometheus.local
 
